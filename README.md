@@ -1,27 +1,45 @@
-# Redwood
+Redwood project to demonstrate CORs issue that only appears when deploying the api to aws via serverless and only for the current user query (other graphQL queries are fine)
 
-> **NOTICE:** RedwoodJS is very close to a stable version 1.0. In the last two years,
-> the project has matured significantly and is already used in production by a number
-> of startups. We intend to have a 1.0 release candidate before the end of 2021 and
-> to release a truly production-ready 1.0 in early 2022.
+# Replicating Cor issue
 
-## Getting Started
-- [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
-- [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
-- [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.
+go to https://main--jolly-lewin-4fa104.netlify.app/
+hit the login button and sign in with
 
-### Setup
-
-We use Yarn as our package manager. To get the dependencies installed, just do this in the root directory:
-
-```terminal
-yarn install
+```
+k.hutten@protonmail.ch
+abc123
 ```
 
-### Fire it up
+Open the network tab in dev tools and refresh the page, there should be two graphQL requests (not including pre-flight), the posts query is successful however the current user query fails from CORS even though it's using the same graphQL endpoint
 
-```terminal
-yarn redwood dev
+See also this forum post: https://community.redwoodjs.com/t/cors-issue-specific-to-auth-request/2575
+# Project setup
+
+This project was created with the following steps
+
+```
+yarn run build:test-project ~/rw3 --typescript
+
+yarn rw setup auth netlify
+yarn rw setup auth netlify
 ```
 
-Your browser should open automatically to `http://localhost:8910` to see the web app. Lambda functions run on `http://localhost:8911` and are also proxied to `http://localhost:8910/.redwood/functions/*`.
+- Changing the db to use postgres and then running `yarn rw prisma migrate dev`
+- Setting up a new db on railway
+- Setting up the site on netlify
+- Setting up netlify's identity service.
+
+```
+yarn rw setup deploy aws-serverless
+```
+
+add DATABASE_URL_PROD env var and te serverless.yml
+
+```
+yarn rw deploy aws
+```
+Update the `apiUrl` in `redwood.toml` to the newly deployed url (in this case: https://mr1b728oh9.execute-api.us-east-2.amazonaws.com/.netlify/functions)
+
+redeploy to netlify.
+
+see replication steps
