@@ -1,6 +1,6 @@
 Redwood project to demonstrate CORs issue that only appears when deploying the api to aws via serverless and only for the current user query (other graphQL queries are fine)
 
-# Replicating Cor issue
+# Replicating Cors issue
 
 go to https://main--jolly-lewin-4fa104.netlify.app/
 hit the login button and sign in with
