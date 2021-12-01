@@ -1,17 +1,11 @@
 # See the full yml reference at https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/
 service: app
+useDotenv: true
 
 # Uncomment org and app if you want to integrate your deployment with the Serverless dashboard. See https://www.serverless.com/framework/docs/dashboard/ for more details.
 # org: your-org
 # app: your-app
 
-plugins:
-  - serverless-dotenv-plugin
-
-custom:
-  dotenv:
-    include:
-      - # List the environment variables you want to include from your .env file here.
 
 provider:
   name: aws
@@ -39,8 +33,8 @@ functions:
     tags: # Tags for this specific lambda function
       endpoint: /.netlify/functions/graphql
     # Uncomment this section to add environment variables either from the Serverless dotenv plugin or using Serverless params
-    # environment:
-    #   YOUR_FIRST_ENV_VARIABLE: ${env:YOUR_FIRST_ENV_VARIABLE}
+    environment:
+      DATABASE_URL: ${env:DATABASE_URL_PROD}
     handler: graphql.handler
     events:
       - httpApi:
