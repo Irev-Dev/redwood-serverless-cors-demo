@@ -16,7 +16,7 @@ export const handler = createGraphQLHandler({
   sdls,
   services,
   cors: {
-    origin: '*',
+    origin: 'https://main--jolly-lewin-4fa104.netlify.app',
     credentials: true,
   },
   onException: () => {
