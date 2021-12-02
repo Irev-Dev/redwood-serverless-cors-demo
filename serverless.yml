@@ -37,10 +37,33 @@ functions:
       DATABASE_URL: ${env:DATABASE_URL_PROD}
     handler: graphql.handler
     events:
-      - httpApi:
+      - http:
           path: /.netlify/functions/graphql
           method: GET
-      - httpApi:
+          cors:
+            origin: 'https://main--jolly-lewin-4fa104.netlify.app'
+            allowCredentials: true
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - auth-provider
+            # auth-provider,authorization,content-type
+      - http:
           path: /.netlify/functions/graphql
           method: POST
+          cors:
+            origin: 'https://main--jolly-lewin-4fa104.netlify.app'
+            allowCredentials: true
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - auth-provider
 
