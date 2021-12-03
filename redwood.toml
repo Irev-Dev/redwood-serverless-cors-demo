@@ -8,7 +8,7 @@
 [web]
   title = "Redwood App"
   port = 8910
-  apiUrl = "https://g6gs2lbqze.execute-api.us-east-2.amazonaws.com/dev/.netlify/functions"
+  apiUrl = "https://ihe81fuhnj.execute-api.us-east-2.amazonaws.com/.netlify/functions"
   includeEnvironmentVariables = [] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
 [api]
   port = 8911

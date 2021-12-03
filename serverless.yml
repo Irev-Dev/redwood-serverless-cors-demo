@@ -12,7 +12,18 @@ provider:
   runtime: nodejs12.x
   region: us-east-2 # This is the AWS region where the service will be deployed.
   httpApi: # HTTP API is used by default. To learn about the available options in API Gateway, see https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html
-    cors: true
+    cors:
+      allowedOrigins:
+        - 'https://main--jolly-lewin-4fa104.netlify.app'
+      allowCredentials: true
+      allowedHeaders:
+        - authorization
+        - auth-provider
+        - Content-Type
+        - X-Amz-Date
+        - X-Api-Key
+        - X-Amz-Security-Token
+        - X-Amz-User-Agent
     payload: '1.0'
   stackTags: # Add CloudFormation stack tags here
     source: serverless
@@ -37,33 +48,10 @@ functions:
       DATABASE_URL: ${env:DATABASE_URL_PROD}
     handler: graphql.handler
     events:
-      - http:
+      - httpApi:
           path: /.netlify/functions/graphql
           method: GET
-          cors:
-            origin: 'https://main--jolly-lewin-4fa104.netlify.app'
-            allowCredentials: true
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - auth-provider
-            # auth-provider,authorization,content-type
-      - http:
+      - httpApi:
           path: /.netlify/functions/graphql
           method: POST
-          cors:
-            origin: 'https://main--jolly-lewin-4fa104.netlify.app'
-            allowCredentials: true
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - auth-provider
 
