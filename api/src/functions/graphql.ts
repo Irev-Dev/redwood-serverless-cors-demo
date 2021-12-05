@@ -15,10 +15,6 @@ export const handler = createGraphQLHandler({
   directives,
   sdls,
   services,
-  cors: {
-    origin: 'https://main--jolly-lewin-4fa104.netlify.app',
-    credentials: true,
-  },
   onException: () => {
     // Disconnect from your database with an unhandled exception.
     db.$disconnect()

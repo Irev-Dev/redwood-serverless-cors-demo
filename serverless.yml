@@ -19,11 +19,7 @@ provider:
       allowedHeaders:
         - authorization
         - auth-provider
-        - Content-Type
-        - X-Amz-Date
-        - X-Api-Key
-        - X-Amz-Security-Token
-        - X-Amz-User-Agent
+        - content-Type
     payload: '1.0'
   stackTags: # Add CloudFormation stack tags here
     source: serverless
